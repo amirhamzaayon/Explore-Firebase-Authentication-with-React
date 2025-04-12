@@ -1,13 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "@/Providers/AuthProvider";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 export const Register = () => {
   const { createNewUser, setUser, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  const [error, setError] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
     //get form data
@@ -50,7 +49,7 @@ export const Register = () => {
             </p>
           </div> */}
           <div className="flex flex-col gap-6">
-            <div className="w-full max-w-sm shadow-2xl card bg-base-100 shrink-0">
+            <div className="w-full max-w-sm shadow-lg card bg-base-100 shrink-0">
               <form onSubmit={handleSubmit} className="card-body">
                 <div className="form-control">
                   <label className="label">
@@ -116,7 +115,7 @@ export const Register = () => {
                 </div>
               </form>
             </div>
-            <div className="w-full max-w-sm shadow-2xl card bg-base-100 shrink-0">
+            <div className="w-full max-w-sm shadow-lg card bg-base-100 shrink-0 ">
               <div className="form-control">
                 <button
                   onClick={() => {
@@ -128,7 +127,7 @@ export const Register = () => {
                         console.error("Google Sign-In Error:", error); // Handle any errors
                       });
                   }}
-                  className="btn btn-neutral"
+                  className="btn"
                 >
                   <FcGoogle />
                   Countine with Google

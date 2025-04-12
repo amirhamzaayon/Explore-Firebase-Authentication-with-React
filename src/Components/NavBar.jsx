@@ -1,10 +1,17 @@
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import ProfileDetails from "./ProfileDetails ";
+import UpdateProfile from "./UpdateProfile";
+// import ProfilePage from "./ProfilePage";
 
 export const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   // console.log(user);
+
+  const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isUpdateOpen, setUpdateOpen] = useState(false);
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
@@ -16,33 +23,37 @@ export const NavBar = () => {
   const publiceNavLinks = (
     <>
       <Link to="/">Home</Link>
-      <Link to="#ServiceCards" onClick={() => scrollToSection("ServiceCards")}>
-        Find Tour
-      </Link>
-      <Link to="#faq" onClick={() => scrollToSection("faq")}>
-        About Us
+      <Link to="#explore" onClick={() => scrollToSection("ServiceCards")}>
+        Explore Your Next Destination
       </Link>
     </>
   );
   const userNavLinks = (
     <>
       <Link to="/">Home</Link>
-      <Link to="#ServiceCards" onClick={() => scrollToSection("ServiceCards")}>
-        Services
+
+      <Link to="#explore" onClick={() => scrollToSection("ServiceCards")}>
+        Explore Your Next Destination
       </Link>
-      <Link to="/features/MyServices">My Tour</Link>
-      {/* <Link to="/features/MyReviews">My Reviews</Link> */}
-      {/* <Link to="/features/AddService">Add Services</Link> */}
     </>
   );
   return (
     <div>
       <div className="justify-between rounded-full navbar bg-slate-100">
         <div className="">
-          <a className="text-xl rounded-full btn btn-ghost">TourCraft</a>
+          <Link className="text-xl rounded-full btn btn-ghost" to="/">
+            TourCraft
+          </Link>
         </div>
         <div className="flex items-center justify-center gap-6 font-medium text-black flex-2">
-          {user ? userNavLinks : publiceNavLinks}
+          {user ? (
+            <>
+              {userNavLinks}
+              {/* <ProfilePage /> */}
+            </>
+          ) : (
+            publiceNavLinks
+          )}
         </div>
         <div className="flex-none">
           {/* <div className="dropdown dropdown-end">
@@ -111,11 +122,11 @@ export const NavBar = () => {
                   </a>
                 </li>
                 <li>
-                  <a>Update Profile</a>
+                  <a onClick={() => setProfileOpen(true)}>My Profile</a>
                 </li>
-                {/* <li>
-                  <a onClick={logOut}>Logout</a>
-                </li> */}
+                <li>
+                  <a onClick={() => setUpdateOpen(true)}>Update Profile</a>
+                </li>
               </ul>
             </div>
           ) : (
@@ -130,6 +141,15 @@ export const NavBar = () => {
           )}
         </div>
       </div>
+      <ProfileDetails
+        isOpen={isProfileOpen}
+        onClose={() => setProfileOpen(false)}
+      ></ProfileDetails>
+
+      <UpdateProfile
+        isOpen={isUpdateOpen}
+        onClose={() => setUpdateOpen(false)}
+      ></UpdateProfile>
     </div>
   );
 };

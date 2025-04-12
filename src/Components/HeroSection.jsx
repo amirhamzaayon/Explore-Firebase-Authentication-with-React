@@ -3,7 +3,6 @@ export const HeroSection = () => {
   const images = [
     "/hero-images/pexels-danikprihodko.jpg",
     "/hero-images/pexels-giancarlo-gallardo.jpg",
-    "/hero-images/pexels-olia-danilevich.jpg",
     "/hero-images/priscilla-du-preez.jpg",
   ];
 
